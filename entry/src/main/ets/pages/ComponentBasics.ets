@@ -66,12 +66,52 @@ struct ComponentBasics {
 
   private switchSliderCode: string = `@State isOn: boolean = true;\n@State value: number = 30;\n\nToggle({ type: ToggleType.Switch, isOn: this.isOn })\n  .onChange((isOn: boolean) => {\n    this.isOn = isOn;\n  })\n\nSlider({ value: this.value, min: 0, max: 100, step: 1 })\n  .onChange((val: number) => {\n    this.value = val;\n  })`;
 
-  private listCode: string = `ForEach(this.listData, (item: BasicItem) => {\n  Row() {\n    Image($r('app.media.startIcon')).width(32).height(32)\n    Column() {\n      Text(item.name)\n      Text(item.desc).fontSize(12).fontColor('#666')\n    }\n  }\n})`;
+  private listCode: string = `ForEach(this.listData, (item: BasicItem) => {\n  Row() {\n    Text(item.name.substring(0, 1))\n      .width(32)\n      .height(32)\n      .textAlign(TextAlign.Center)\n      .backgroundColor('#E8F0FF')\n      .borderRadius(16)\n    Column() {\n      Text(item.name)\n      Text(item.desc).fontSize(12).fontColor('#666')\n    }\n  }\n})`;
 
   build() {
     Scroll() {
       Column() {
         PageHeader({ title: '组件基础' })
+
+        Column() {
+          Text('页面说明')
+            .fontSize(14)
+            .fontWeight(FontWeight.Medium)
+            .margin({ bottom: 6 })
+          Text('本页以原生控件展示 ArkUI 常见组件的组合方式与基础交互，适合用来快速熟悉默认行为、样式配置与状态联动。')
+            .fontSize(12)
+            .fontColor('#666666')
+            .lineHeight(18)
+            .margin({ bottom: 4 })
+          Text('• 组件结构：Scroll + Column/Row 组合常见页面结构')
+            .fontSize(12)
+            .fontColor('#666666')
+            .lineHeight(18)
+          Text('• 文本样式：字号、字重、颜色、间距等基础样式')
+            .fontSize(12)
+            .fontColor('#666666')
+            .lineHeight(18)
+          Text('• 按钮事件：onClick 更新 @State 并触发界面刷新')
+            .fontSize(12)
+            .fontColor('#666666')
+            .lineHeight(18)
+          Text('• 输入联动：TextInput 修改后实时展示内容')
+            .fontSize(12)
+            .fontColor('#666666')
+            .lineHeight(18)
+          Text('• 开关/滑条：Toggle 与 Slider 的状态和数值变化')
+            .fontSize(12)
+            .fontColor('#666666')
+            .lineHeight(18)
+          Text('• 列表卡片：ForEach 渲染列表并配合圆角/背景/间距')
+            .fontSize(12)
+            .fontColor('#666666')
+            .lineHeight(18)
+        }
+        .padding(12)
+        .backgroundColor('#FFFFFF')
+        .borderRadius(12)
+        .margin({ bottom: 12 })
 
         Column() {
           Text('文本与样式')
@@ -202,10 +242,13 @@ struct ComponentBasics {
           Column() {
             ForEach(this.listData, (item: BasicItem) => {
               Row() {
-                Image($r('app.media.startIcon'))
+                Text(item.name.substring(0, 1))
                   .width(32)
                   .height(32)
-                  .borderRadius(8)
+                  .fontSize(12)
+                  .textAlign(TextAlign.Center)
+                  .backgroundColor('#E8F0FF')
+                  .borderRadius(16)
                 Column() {
                   Text(item.name)
                     .fontSize(14)
