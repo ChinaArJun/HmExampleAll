@@ -64,7 +64,7 @@ struct ComponentBasics {
 
   private inputCode: string = `@State nickname: string = '';\n\nTextInput({ text: this.nickname, placeholder: '输入昵称' })\n  .onChange((value: string) => {\n    this.nickname = value;\n  })`;
 
-  private switchSliderCode: string = `@State isOn: boolean = true;\n@State value: number = 30;\n\nSwitch({ checked: this.isOn })\n  .onChange((checked: boolean) => {\n    this.isOn = checked;\n  })\n\nSlider({ value: this.value, min: 0, max: 100, step: 1 })\n  .onChange((val: number) => {\n    this.value = val;\n  })`;
+  private switchSliderCode: string = `@State isOn: boolean = true;\n@State value: number = 30;\n\nToggle({ type: ToggleType.Switch, isOn: this.isOn })\n  .onChange((isOn: boolean) => {\n    this.isOn = isOn;\n  })\n\nSlider({ value: this.value, min: 0, max: 100, step: 1 })\n  .onChange((val: number) => {\n    this.value = val;\n  })`;
 
   private listCode: string = `ForEach(this.listData, (item: BasicItem) => {\n  Row() {\n    Image($r('app.media.startIcon')).width(32).height(32)\n    Column() {\n      Text(item.name)\n      Text(item.desc).fontSize(12).fontColor('#666')\n    }\n  }\n})`;
 
@@ -163,9 +163,9 @@ struct ComponentBasics {
             .margin({ bottom: 8 })
           Column() {
             Row() {
-              Switch({ checked: this.isOn })
-                .onChange((checked: boolean) => {
-                  this.isOn = checked;
+              Toggle({ type: ToggleType.Switch, isOn: this.isOn })
+                .onChange((isOn: boolean) => {
+                  this.isOn = isOn;
                 })
               Text(this.isOn ? '已开启' : '已关闭')
                 .fontSize(14)

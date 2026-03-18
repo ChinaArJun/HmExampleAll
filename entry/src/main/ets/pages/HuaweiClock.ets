@@ -67,8 +67,20 @@ struct HuaweiClock {
   }
 
   private toggleAlarm(index: number, enabled: boolean): void {
-    const next = [...this.alarms];
-    next[index] = { ...next[index], enabled };
+    const next: Array<Alarm> = [];
+    for (let i = 0; i < this.alarms.length; i++) {
+      const alarm = this.alarms[i];
+      if (i === index) {
+        next.push({
+          id: alarm.id,
+          time: alarm.time,
+          label: alarm.label,
+          enabled: enabled
+        });
+      } else {
+        next.push(alarm);
+      }
+    }
     this.alarms = next;
   }
 
@@ -83,12 +95,14 @@ struct HuaweiClock {
       label: '新闹钟',
       enabled: true
     };
-    this.alarms = [...this.alarms, newAlarm];
+    const next: Array<Alarm> = this.alarms.slice();
+    next.push(newAlarm);
+    this.alarms = next;
   }
 
   private clockCode: string = `aboutToAppear() {\n  this.updateTime();\n  this.timerId = setInterval(() => {\n    this.updateTime();\n  }, 1000) as number;\n}`;
 
-  private alarmCode: string = `Switch({ checked: alarm.enabled })\n  .onChange((checked: boolean) => {\n    this.toggleAlarm(index, checked);\n  })`;
+  private alarmCode: string = `Toggle({ type: ToggleType.Switch, isOn: alarm.enabled })\n  .onChange((isOn: boolean) => {\n    this.toggleAlarm(index, isOn);\n  })`;
 
   aboutToAppear() {
     this.updateTime();
@@ -149,9 +163,9 @@ struct HuaweiClock {
                     .margin({ top: 2 })
                 }
                 .layoutWeight(1)
-                Switch({ checked: alarm.enabled })
-                  .onChange((checked: boolean) => {
-                    this.toggleAlarm(index, checked);
+                Toggle({ type: ToggleType.Switch, isOn: alarm.enabled })
+                  .onChange((isOn: boolean) => {
+                    this.toggleAlarm(index, isOn);
                   })
               }
               .padding(12)

@@ -74,7 +74,7 @@ struct StateManagement {
 
   private linkCode: string = `@Component\nstruct ChildEditor {\n  @Link message: string;\n\n  Button('追加')\n    .onClick(() => this.message = this.message + '!')\n}`;
 
-  private storageCode: string = `AppStorage.SetOrCreate('profileName', '小明');\n\n@StorageLink('profileName') name: string;\nTextInput({ text: this.name })`;
+  private storageCode: string = `AppStorage.SetOrCreate('autoSync', true);\n\n@StorageLink('autoSync') autoSync: boolean;\nToggle({ type: ToggleType.Switch, isOn: this.autoSync })\n  .onChange((isOn: boolean) => this.autoSync = isOn)`;
 
   build() {
     Scroll() {
@@ -155,9 +155,9 @@ struct StateManagement {
                 this.profileName = value;
               })
             Row() {
-              Switch({ checked: this.autoSync })
-                .onChange((checked: boolean) => {
-                  this.autoSync = checked;
+              Toggle({ type: ToggleType.Switch, isOn: this.autoSync })
+                .onChange((isOn: boolean) => {
+                  this.autoSync = isOn;
                 })
               Text(this.autoSync ? '自动同步开启' : '自动同步关闭')
                 .fontSize(12)

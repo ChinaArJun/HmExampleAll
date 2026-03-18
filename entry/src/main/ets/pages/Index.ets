@@ -12,7 +12,7 @@ struct Index {
   private items: Array<NavItem> = [
     {
       title: '鸿蒙-1. 组件基础',
-      subtitle: 'Text / Button / Input / Switch / Slider / List / Image',
+      subtitle: 'Text / Button / Input / Toggle / Slider / List / Image',
       url: 'pages/ComponentBasics'
     },
     {

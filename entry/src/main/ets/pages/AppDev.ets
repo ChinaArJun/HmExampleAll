@@ -56,7 +56,7 @@ struct AppDev {
 
   private toastCode: string = `promptAction.showToast({ message: '保存成功' })`;
 
-  private storageCode: string = `@StorageLink('noticeEnabled') noticeEnabled: boolean;\n\nSwitch({ checked: this.noticeEnabled })\n  .onChange((checked) => this.noticeEnabled = checked)`;
+  private storageCode: string = `@StorageLink('noticeEnabled') noticeEnabled: boolean;\n\nToggle({ type: ToggleType.Switch, isOn: this.noticeEnabled })\n  .onChange((isOn) => this.noticeEnabled = isOn)`;
 
   private validatePhone(): void {
     const ok = /^1\d{10}$/.test(this.phone);
@@ -168,9 +168,9 @@ struct AppDev {
             .margin({ bottom: 8 })
           Column() {
             Row() {
-              Switch({ checked: this.noticeEnabled })
-                .onChange((checked: boolean) => {
-                  this.noticeEnabled = checked;
+              Toggle({ type: ToggleType.Switch, isOn: this.noticeEnabled })
+                .onChange((isOn: boolean) => {
+                  this.noticeEnabled = isOn;
                 })
               Text(this.noticeEnabled ? '通知已开启' : '通知已关闭')
                 .fontSize(12)
