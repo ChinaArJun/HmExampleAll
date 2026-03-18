@@ -1,5 +1,12 @@
 {
   "src": [
-    "pages/Index"
+    "pages/Index",
+    "pages/ComponentBasics",
+    "pages/ZhihuComment",
+    "pages/StateManagement",
+    "pages/MeituanWaimai",
+    "pages/AppDev",
+    "pages/HuaweiClock",
+    "pages/RouteDemo"
   ]
 }
