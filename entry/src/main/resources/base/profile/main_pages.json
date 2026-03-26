@@ -7,6 +7,9 @@
     "pages/MeituanWaimai",
     "pages/AppDev",
     "pages/HuaweiClock",
-    "pages/RouteDemo"
+    "pages/RouteDemo",
+    "pages/SkillDemo",
+    "pages/ComponentAdvanced",
+    "pages/LayoutNavigation"
   ]
 }

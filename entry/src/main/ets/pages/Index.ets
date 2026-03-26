@@ -1,6 +1,7 @@
 import router from '@ohos.router';
 
 interface NavItem {
+  id: string;
   title: string;
   subtitle: string;
   url: string;
@@ -11,34 +12,58 @@ interface NavItem {
 struct Index {
   private items: Array<NavItem> = [
     {
+      id: 'navComponentBasics',
       title: '鸿蒙-1. 组件基础',
       subtitle: 'Text / Button / Input / Toggle / Slider / List / Image',
       url: 'pages/ComponentBasics'
     },
     {
+      id: 'navZhihu',
       title: '鸿蒙-2. 知乎评论',
       subtitle: '评论列表、点赞、回复、层级展示',
       url: 'pages/ZhihuComment'
     },
     {
+      id: 'navState',
       title: '鸿蒙-3. 状态管理',
       subtitle: '@State / @Prop / @Link / AppStorage',
       url: 'pages/StateManagement'
     },
     {
+      id: 'navMeituan',
       title: '鸿蒙-4. 美团外卖',
       subtitle: '搜索、分类、店铺卡片、加入购物车',
       url: 'pages/MeituanWaimai'
     },
     {
+      id: 'navAppDev',
       title: '鸿蒙-5. 应用程序开发',
       subtitle: '路由、表单校验、提示、设置持久化',
       url: 'pages/AppDev'
     },
     {
+      id: 'navClock',
       title: '鸿蒙-6. 华为闹钟',
       subtitle: '当前时间、闹钟列表、开关、添加闹钟',
       url: 'pages/HuaweiClock'
+    },
+    {
+      id: 'navSkillsDemo',
+      title: '鸿蒙-7. Skills Demo',
+      subtitle: 'TaskPool / @Concurrent / 后台计算',
+      url: 'pages/SkillDemo'
+    },
+    {
+      id: 'navComponentAdvanced',
+      title: '鸿蒙-8. 组件进阶',
+      subtitle: 'Radio / Checkbox / Progress / TextArea',
+      url: 'pages/ComponentAdvanced'
+    },
+    {
+      id: 'navLayoutNavigation',
+      title: '鸿蒙-9. 布局与导航',
+      subtitle: 'Tabs / Swiper / Grid',
+      url: 'pages/LayoutNavigation'
     }
   ];
 
@@ -76,6 +101,7 @@ struct Index {
             }
             .padding(14)
           }
+          .id(item.id)
           .backgroundColor('#FFFFFF')
           .borderRadius(12)
           .margin({ bottom: 12 })

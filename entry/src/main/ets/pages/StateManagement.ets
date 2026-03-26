@@ -1,4 +1,5 @@
 import router from '@ohos.router';
+import { appendExclamation, formatAutoSyncLabel, updateCount } from '../utils/StateHelpers';
 
 AppStorage.SetOrCreate('profileName', '小明');
 AppStorage.SetOrCreate('autoSync', true);
@@ -55,7 +56,7 @@ struct ChildEditor {
         .height(28)
         .margin({ left: 10 })
         .onClick(() => {
-          this.message = `${this.message}!`;
+          this.message = appendExclamation(this.message);
         })
     }
   }
@@ -121,7 +122,7 @@ struct StateManagement {
           Row() {
             Button('减一')
               .onClick(() => {
-                this.count -= 1;
+                this.count = updateCount(this.count, -1);
               })
             Text(`${this.count}`)
               .fontSize(16)
@@ -129,7 +130,7 @@ struct StateManagement {
               .margin({ left: 12, right: 12 })
             Button('加一')
               .onClick(() => {
-                this.count += 1;
+                this.count = updateCount(this.count, 1);
               })
           }
           .padding(12)
@@ -191,7 +192,7 @@ struct StateManagement {
                 .onChange((isOn: boolean) => {
                   this.autoSync = isOn;
                 })
-              Text(this.autoSync ? '自动同步开启' : '自动同步关闭')
+              Text(formatAutoSyncLabel(this.autoSync))
                 .fontSize(12)
                 .margin({ left: 8 })
             }
